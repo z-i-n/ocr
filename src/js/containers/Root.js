@@ -7,8 +7,8 @@ import configureStore from '../configureStore';
 import App from '../components/App.js';
 import Index from '../components/Index.js';
 import NoMatch from '../components/NoMatch.js';
-import Exam from '../components/exam/Exam.js';
-import { bindDomEvent } from '../library/DomEventHandler';
+import Edit from '../components/edit/Edit.js';
+import UploadImage from '../components/upload/UploadImage.js';
 
 const store = configureStore();
 const history = syncHistoryWithStore(browserHistory, store);
@@ -18,7 +18,6 @@ export default class Root extends Component {
   componentDidMount() {
     // console.log("Root componentDidMount");
     // console.log(jQuery);
-    bindDomEvent();
   }
 
   render() {
@@ -27,8 +26,8 @@ export default class Root extends Component {
           <Router history={history}>
             <Route path="/" component={App}>
               <IndexRoute component={Index}/>
-              <Route path="example" component={Exam}/>
-              <Route path="about" component={About}/>
+              <Route path="edit" component={Edit}/>
+              <Route path="upload" component={UploadImage}/>
               <Route path="inbox" component={Inbox}>
                 <Route path="messages/:id" component={Message} />
               </Route>

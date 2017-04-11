@@ -87,7 +87,7 @@
     gulp.task('copy-css', ['del-file'], function() {
         return gulp.src([
                 './node_modules/font-awesome/css/font-awesome.css',
-                './src/css/plugins/nouislider/nouislider.min.css'
+                './node_modules/nouislider/distribute/nouislider.min.css'
             ]) 
             .pipe(gulp.dest('./dist/css/')); 
     });
@@ -95,8 +95,7 @@
     gulp.task('copy-js', ['del-file'], function() {
         return gulp.src([
                 './node_modules/jquery/dist/jquery.js',
-                './node_modules/metismenu/dist/metisMenu.js',
-                './src/js/plugins/nouislider/nouislider.min.js'
+                './node_modules/metismenu/dist/metisMenu.js'
             ]) 
             .pipe(concat('_vender.js'))
             .pipe(gulp.dest('./dist/js/'));
