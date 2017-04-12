@@ -117,7 +117,7 @@ class Edit extends Component {
     return (
       <div>
 
-        <div className="col-lg-8">
+        <div className="col-lg-12">
             <div className="ibox float-e-margins">
                 <div className="ibox-title">
                     <h5>Control Panel</h5>
@@ -128,7 +128,7 @@ class Edit extends Component {
                     </div>
                 </div>
                 <div className="ibox-content" style={{display: 'none'}}>
-                  <div className="row">
+                  <div className="row show-grid">
                     <div className="col-xs-6 col-sm-4">
                       <p>Opacity: <span ref={(val) => this.opacityValue=val}>0.30</span></p>
                       <div id="opacity_slider" ref={(slider) => this.opacitySlider=slider}></div>
@@ -140,7 +140,7 @@ class Edit extends Component {
                     </div>
 
                     <div className="col-xs-6 col-sm-4">
-                      <Button bsStyle="success" onClick={this.handleSave}>Save</Button>
+                      <Button bsStyle="success" style={{marginTop: '8px', float: 'right'}} onClick={this.handleSave}>Save</Button>
                     </div>
                   </div>
                 </div>

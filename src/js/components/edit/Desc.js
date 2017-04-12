@@ -212,7 +212,6 @@ class Desc extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('Desc componentWillReceiveProps', this.props, nextProps);
     if (this.props.save != nextProps.save && nextProps.save) {
       this.save();
     }

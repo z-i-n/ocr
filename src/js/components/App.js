@@ -24,7 +24,7 @@ class App extends Component {
     //console.log("componentWillUpdate: ", nextProps, nextState);
   }
   componentDidUpdate(prevProps, prevState) {
-    //console.log("componentDidUpdate: ", prevProps, prevState);
+    console.log("App componentDidUpdate: ");
   }
   componentWillUnmount() {
     //console.log("componentWillUnmount");

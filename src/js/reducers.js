@@ -2,6 +2,7 @@
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 import { jsonData } from './reducers/ocrData';
+import { uploadStatus } from './reducers/fileUpload';
 import { opacity } from './reducers/opacity';
 import { zoom } from './reducers/zoom';
 import { save } from './reducers/save';
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   zoom,
   loadingBar,
   save,
+  uploadStatus,
   routing: routerReducer
 });
 
