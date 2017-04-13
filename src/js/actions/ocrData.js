@@ -2,6 +2,8 @@
 import fetch from 'isomorphic-fetch';
 import io from 'socket.io-client';
 
+const url = '/api/item/';
+
 export const REQUEST_DATA = 'REQUEST_DATA';
 function requestData() {
   return {
@@ -35,11 +37,11 @@ function receiveSave() {
   };
 }
 
-export function requestJsonData(url) {
+export function requestJsonData(id) {
   return (dispatch, getState) => {
     dispatch(requestData());
 
-    return fetch(url)
+    return fetch(url+id)
       .then(response => { return response.json(); })
       .then(json => { return dispatch(receiveData(json)); });
   };
@@ -57,16 +59,16 @@ export function saveJsonData(json) {
     });*/
     socket.on('saved', function(data) {
       //done save
-      console.log(data);
+      //console.log(data);
     });
   }
 
-  console.log(json);
+  //console.log(json);
   return (dispatch, getState) => {
     dispatch(requestSave());
 
     return socket.emit('save', json, function(data) {
-      console.log(data);
+      //console.log(data);
       return dispatch(receiveSave());
     });
   };

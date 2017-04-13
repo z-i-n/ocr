@@ -16,8 +16,8 @@ const history = syncHistoryWithStore(browserHistory, store);
 export default class Root extends Component {
 
   componentDidMount() {
-    // console.log("Root componentDidMount");
-    // console.log(jQuery);
+    // //console.log("Root componentDidMount");
+    // //console.log(jQuery);
   }
 
   render() {
@@ -26,7 +26,7 @@ export default class Root extends Component {
           <Router history={history}>
             <Route path="/" component={App}>
               <IndexRoute component={Index}/>
-              <Route path="edit" component={Edit}/>
+              <Route path="edit/:itemid/:ext" component={Edit}/>
               <Route path="upload" component={UploadImage}/>
               <Route path="inbox" component={Inbox}>
                 <Route path="messages/:id" component={Message} />

@@ -1,27 +1,23 @@
 //@flow
 import fetch from 'isomorphic-fetch';
 
-const url = "/";
-export const REQUEST_DATA = 'REQUEST_DATA';
+const url = "/api/list";
+export const REQUEST_LIST_DATA = 'REQUEST_LIST_DATA';
 function requestData() {
   return {
-    type: REQUEST_DATA
+    type: REQUEST_LIST_DATA
   };
 }
 
-export const RECEIVE_DATA = 'RECEIVE_DATA';
+export const RECEIVE_LIST_DATA = 'RECEIVE_LIST_DATA';
 function receiveData(json) {
-  let arr = json.responses ? json.responses[0].textAnnotations : json.textAnnotations;
-  if (json.responses) {
-    arr.shift();
-  }
   return {
-    type: RECEIVE_DATA,
-    data: arr
+    type: RECEIVE_LIST_DATA,
+    list: json
   };
 }
 
-export function requestListData(url) {
+export function requestListData() {
   return (dispatch, getState) => {
     dispatch(requestData());
 

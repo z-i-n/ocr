@@ -43,9 +43,9 @@ function mergeSeveral({x, y, w, h, items, history}) {
   }
 
   if (mergeKeys.length > 0) {
-    // console.log(mergeKeys);
+    // //console.log(mergeKeys);
     // mergeKeys.sort();
-    // console.log(mergeKeys);
+    // //console.log(mergeKeys);
     mergeKeys.reduce((prev, curr) => {
       mergeElement({target: mergeTargets[prev.toString()], source: mergeTargets[curr.toString()], history});
       return prev;

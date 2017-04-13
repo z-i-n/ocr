@@ -2,19 +2,21 @@
 var express = require('express');
 var path = require("path");
 var socket = require('./socket');
+var api = require('./api');
+
 /* Start Dev Server */
 var app     = express();
-console.log(process.env.PORT || 5000);
+//console.log(process.env.PORT || 5000);
 // Serve static assets
 app.set('port', (process.env.PORT || 5000));
 app.use(express.static(path.resolve(__dirname, '..', 'dist')));
 
+api(app);
+
 // Always return the main index.html, so react-router render the route in the client
-app.get(/^((?!\/socket\.io).)*$/, (req, res) => {
+app.use(/^((?!\/socket\.io).)*$/, (req, res) => {
   res.sendFile(path.resolve(__dirname, '..', 'dist', 'index.html'));
 });
-
-
 
 // /^((?!\/api).)*$/
 /*app.use('/socket.io', function(req, res, next) {
@@ -32,7 +34,7 @@ app.use(function(req, res, next) {
 });
 
 // app.listen(app.get('port'), function() {
-//   console.log("Node app is running at localhost:" + app.get('port'));
+//   //console.log("Node app is running at localhost:" + app.get('port'));
 // });
 
 socket(app);
@@ -49,6 +51,6 @@ socket(app);
 
 // server.listen(5000);
 // io.on('connection', function(client) {
-// console.log('Client connected...');
+// //console.log('Client connected...');
 //  //socket code here
 // });

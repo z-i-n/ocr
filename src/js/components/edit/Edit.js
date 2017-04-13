@@ -2,10 +2,9 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Glyphicon, Grid, Row, Col, Button } from 'react-bootstrap';
 import { showLoading, hideLoading } from 'react-redux-loading-bar';
-import { requestJsonData } from '../../actions/ocrData';
 import Desc from './Desc';
 import { OCRLIST } from '../../constants';
-import { setOpacity, setZoom, doSave } from '../../actions';
+import { setOpacity, setZoom, doSave, requestJsonData } from '../../actions';
 import { bindDomEvent } from '../../library/DomEventHandler';
 import noUiSlider from 'nouislider';
 
@@ -22,7 +21,7 @@ class Edit extends Component {
   }
 
   componentDidMount() {
-    console.log('Edit componentDidMount', this.img.naturalHeight, this.img.naturalWidth);
+    //console.log('Edit componentDidMount', this.img.naturalHeight, this.img.naturalWidth);
     bindDomEvent();
 
     let dispatch = this.props.dispatch,
@@ -68,7 +67,7 @@ class Edit extends Component {
 
   componentDidUpdate(prevProps) {
     const { jsonData, dispatch } = this.props;
-    //console.log('componentDidUpdate');
+    ////console.log('componentDidUpdate');
     if (!prevProps.jsonData.isLoading && jsonData.isLoading && jsonData.data.length > 0) {
       this.opacitySlider.noUiSlider.set(0.3);
       this.zoomSlider.noUiSlider.set(1);
@@ -77,7 +76,7 @@ class Edit extends Component {
       dispatch(hideLoading());
     }
     if (prevProps.save && !this.props.save) {
-      this.props.dispatch(hideLoading());
+      dispatch(hideLoading());
     }
   }
 
@@ -85,7 +84,8 @@ class Edit extends Component {
     const { dispatch } = this.props;
     dispatch(showLoading());
     this.setState({width: e.target.naturalWidth, height: e.target.naturalHeight});
-    dispatch(requestJsonData(OCRLIST[this.props.location.query.e].json));
+    //dispatch(requestJsonData(OCRLIST[this.props.location.query.e].json));
+    dispatch(requestJsonData(this.props.params.itemid));
   }
 
   getStyle(isImage) {
@@ -123,11 +123,11 @@ class Edit extends Component {
                     <h5>Control Panel</h5>
                     <div className="ibox-tools">
                         <a className="collapse-link">
-                            <i className="fa fa-chevron-down"></i>
+                            <i className="fa fa-chevron-up"></i>
                         </a>
                     </div>
                 </div>
-                <div className="ibox-content" style={{display: 'none'}}>
+                <div className="ibox-content">
                   <div className="row show-grid">
                     <div className="col-xs-6 col-sm-4">
                       <p>Opacity: <span ref={(val) => this.opacityValue=val}>0.30</span></p>
@@ -155,11 +155,11 @@ class Edit extends Component {
             style={this.getStyle()}>
             <img ref={(img) => this.img = img}
               onLoad={this.handleLoad}
-              src={OCRLIST[location.query.e].image}
+              src={`/resource/${this.props.params.itemid}.${this.props.params.ext}`}
               style={this.getStyle(true)} />
             <Desc
               scrollBox={this.scrollWrap}
-              filename={OCRLIST[location.query.e].json}
+              filename={this.props.params.itemid}
               boxies={boxies}
               width={this.state.width}
               height={this.state.height}

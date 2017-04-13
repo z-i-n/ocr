@@ -87,7 +87,7 @@ class AsyncApp extends Component {
   componentDidUpdate(prevProps, prevState) {
     //this.props.dispatch(showLoading());
     const { dispatch, ticketStatus, errorRequest, callList } = this.props;
-    //console.log('componentDidUpdate:', prevProps, this.props, JSON.stringify(prevProps) == JSON.stringify(this.props));
+    ////console.log('componentDidUpdate:', prevProps, this.props, JSON.stringify(prevProps) == JSON.stringify(this.props));
     if ((!prevProps.ticketStatus.isLoading && ticketStatus.isLoading)
         || (!prevProps.callList.isLoading && callList.isLoading)
         || errorRequest) {

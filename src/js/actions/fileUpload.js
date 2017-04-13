@@ -1,7 +1,7 @@
 //@flow
 import fetch from 'isomorphic-fetch';
 
-const url = '/fileupload';
+const url = '/api/fileupload';
 
 export const REQUEST_UPLOAD_FILE = 'REQUEST_UPLOAD_FILE';
 function requestUpload() {
@@ -35,7 +35,7 @@ export function uploadFile(fileData) {
       return dispatch(receiveUpload(json));
     })
     .catch( function( error ) {
-      console.log( 'Request failed', error );
+      //console.log( 'Request failed', error );
     });
   };
 }

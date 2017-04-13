@@ -4,7 +4,7 @@ var path = require("path");
 var socket = require('./server/sockets');
 /* Start Dev Server */
 var app     = express();
-console.log(process.env.PORT);
+//console.log(process.env.PORT);
 // Serve static assets
 //app.set('port', (process.env.PORT || 5000));
 app.use(express.static(path.resolve(__dirname, '.', 'public')));
@@ -23,7 +23,7 @@ app.use(function(req, res, next) {
 });
 
 // app.listen(app.get('port'), function() {
-//   console.log("Node app is running at localhost:" + app.get('port'));
+//   //console.log("Node app is running at localhost:" + app.get('port'));
 // });
 socket(app);
 
@@ -39,6 +39,6 @@ socket(app);
 
 // server.listen(5000);
 // io.on('connection', function(client) {
-// console.log('Client connected...');
+// //console.log('Client connected...');
 //  //socket code here
 // });

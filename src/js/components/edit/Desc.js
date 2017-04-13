@@ -19,7 +19,7 @@ class Desc extends Component {
     this.handleMouseUp = this.handleMouseUp.bind(this);
     this.editHistory = new DomHistory();
     this.changeZoom = false;
-    console.log('DESC constructor');
+    //console.log('DESC constructor');
   }
 
   getStyle(vertices, desc) {
@@ -72,7 +72,7 @@ class Desc extends Component {
   }
 
   handleMouseMove(e) {
-    //console.log(this.selectBox.style.width);
+    ////console.log(this.selectBox.style.width);
     let x = e.pageX + this.props.scrollBox.scrollLeft,
       y = e.pageY + this.props.scrollBox.scrollTop;
     if (this.selectBox.style.display == '') {
@@ -169,7 +169,7 @@ class Desc extends Component {
         }
       }
     } else if (e.which == 46) {
-      console.log('delete');
+      //console.log('delete');
       if (this.prevElem) {
         this.editHistory.history = Object.assign({}, {
           type: 'delete',
@@ -192,14 +192,14 @@ class Desc extends Component {
     for (let item of items) {
       saveData.textAnnotations.push(Object2Json(item, this.props.zoom.value));
     }
-    //console.log(JSON.stringify(saveData));
+    ////console.log(JSON.stringify(saveData));
 
     this.props.dispatch(saveJsonData({filename: this.props.filename, data: saveData}));
   }
 
   componentDidUpdate() {
     //ctrlKey metaKey
-    console.log('Desc componentDidUpdate' + this.props.boxies.length);
+    //console.log('Desc componentDidUpdate' + this.props.boxies.length);
     document.body.removeEventListener('keydown', this.keyHandler, false);
     document.body.addEventListener('keydown', this.keyHandler, false);
     if (this.wrapBox) {
@@ -208,7 +208,7 @@ class Desc extends Component {
   }
 
   componentWillUnmount() {
-    console.log('Desc componentWillUnmount');
+    //console.log('Desc componentWillUnmount');
   }
 
   componentWillReceiveProps(nextProps) {
@@ -223,26 +223,26 @@ class Desc extends Component {
   }
 
   //shouldComponentUpdate(nextProps) {
-    //console.log('shouldComponentUpdate', nextProps.routing.search != this.props.routing.search);
+    ////console.log('shouldComponentUpdate', nextProps.routing.search != this.props.routing.search);
     //return nextProps.routing.search != this.props.routing.search;
   //}
 
   componentWillUpdate() {
-    console.log('Desc componentWillUpdate');
+    //console.log('Desc componentWillUpdate');
   }
 
   componentWillUnmount() {
-    console.log('Desc componentWillUnmount');
+    //console.log('Desc componentWillUnmount');
   }
 
   componentDidMount() {
-    console.log('Desc componentDidMount');
+    //console.log('Desc componentDidMount');
   }
 
   render() {
     let { boxies, opacity, width, height, zoom } = this.props;
     this.boxies = Object.assign([], boxies);
-    console.log('render', zoom.value);
+    //console.log('render', zoom.value);
     if (boxies.length > 0) {
       return (
         <div ref={(wrapBox) => this.wrapBox = wrapBox} id="wrap-item" style={{position: 'absolute', top: '0px', left: '0px', width: `${(width*zoom.value)}px`, height: `${(height*zoom.value)}px`, zIndex: 3, opacity: (1-opacity.value)}}

@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from "react";
 import { connect } from "react-redux";
 import { Glyphicon, Grid, Row, Col, Button } from "react-bootstrap";
 import { showLoading, hideLoading } from "react-redux-loading-bar";
-import { setOpacity, setZoom, uploadFile } from "../../actions";
+import { setOpacity, setZoom, uploadFile, requestListData } from "../../actions";
 
 class UploadImage extends Component {
 
@@ -10,19 +10,21 @@ class UploadImage extends Component {
     super(...args);
     this.handleChange = this.handleChange.bind(this);
     this.handleUpload = this.handleUpload.bind(this);
-    console.log("DESC constructor");
+    //console.log("DESC constructor");
   }
 
   componentDidMount() {
-    //console.log("componentDidMount", this.img.naturalHeight, this.img.naturalWidth);
+    ////console.log("componentDidMount", this.img.naturalHeight, this.img.naturalWidth);
   }
 
   componentDidUpdate(prevProps) {
     const { uploadStatus, dispatch } = this.props;
-    //console.log('componentDidUpdate');
+    ////console.log('componentDidUpdate');
     if (!prevProps.uploadStatus.isLoading && uploadStatus.isLoading && uploadStatus.fileName) {
-      console.log(uploadStatus.fileName);
-      this.props.router.replace('/edit?e=0');
+      //console.log(uploadStatus.fileName);
+      dispatch(hideLoading());
+      dispatch(requestListData());
+      this.props.router.replace('/edit/'+uploadStatus.fileName.replace('.', '/'));
     }
   }
 
@@ -39,8 +41,8 @@ class UploadImage extends Component {
 
   handleUpload(e) {
     //this.uploadForm.submit();
-
     let file = this.ocrImage.files[0];
+    this.props.dispatch(showLoading());
     this.props.dispatch(uploadFile(file));
     // let reader = new FileReader();
 

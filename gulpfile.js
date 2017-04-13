@@ -52,16 +52,20 @@
         //     throw new Error('ESLint warnings (' + numberOfWarnings + ') equal to or greater than the threshold (' + thresholdWarnings + ')');
         // }))
         .pipe(eslint.failAfterError()).on('error', function(err){
-            console.log(err);
-            process.exit();
+            //console.log(err);
+            setTimeout(() => {
+                //console.log('===========restart=========');
+                runSequence('build');
+            }, 5000);
+            //process.exit();
         });
         // .pipe(eslint.format('checkstyle'))
         // .pipe(eslint.result(result => {
         //     // Called for each ESLint result.
-        //     console.log(`ESLint result: ${result.filePath}`);
-        //     console.log(`# Messages: ${result.messages.length}`);
-        //     console.log(`# Warnings: ${result.warningCount}`);
-        //     console.log(`# Errors: ${result.errorCount}`);
+        //     //console.log(`ESLint result: ${result.filePath}`);
+        //     //console.log(`# Messages: ${result.messages.length}`);
+        //     //console.log(`# Warnings: ${result.warningCount}`);
+        //     //console.log(`# Errors: ${result.errorCount}`);
         //}));
     });
 
@@ -110,7 +114,7 @@
           }}))
         .pipe(sassLint.format())
         .pipe(sassLint.failOnError()).on('error', function(err){
-            //console.log(err);
+            ////console.log(err);
         });
     });
 
@@ -152,7 +156,7 @@
         bundler = bundler.plugin(watchify, {ignoreWatch: ['**/package.json','**/node_modules/**']});
         watcherSass = gulp.watch('src/sass/**/*.scss', ['build']);
         watcherSass.on('change', function(event) {
-            console.log('Sass File ' + event.path + ' was ' + event.type + ', running tasks...');
+            //console.log('Sass File ' + event.path + ' was ' + event.type + ', running tasks...');
             runSequence('build-sass');
         });
     }
@@ -184,8 +188,8 @@
     /* watch task */
     gulp.task('watch', ['build'], function() {
         bundler.on('update', function(ids) {
-            console.log(ids);
-            console.log('-> detect file changes...');
+            //console.log(ids);
+            //console.log('-> detect file changes...');
             runSequence('build-js');
         });
     });

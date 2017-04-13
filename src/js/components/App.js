@@ -4,6 +4,7 @@ import { Nav, NavItem, Glyphicon, Grid, Row, Col, Button } from 'react-bootstrap
 import { LoadingBar, showLoading, hideLoading } from 'react-redux-loading-bar';
 import { Link } from 'react-router';
 import { OCRLIST } from '../constants';
+import { requestListData } from '../actions';
 
 class App extends Component {
 
@@ -12,22 +13,23 @@ class App extends Component {
   }
 
   componentWillMount() {
-    //console.log("componentWillMount");
+    //console.log("App componentWillMount");
   }
   componentDidMount() {
-    //console.log("componentDidMount");
+    //console.log("App componentDidMount");
+    this.props.dispatch(requestListData());
   }
   componentWillReceiveProps(nextProps) {
-    //console.log("componentWillReceiveProps: ", nextProps);
+    //console.log("App componentWillReceiveProps: ");
   }
   componentWillUpdate(nextProps, nextState) {
-    //console.log("componentWillUpdate: ", nextProps, nextState);
+    //console.log("App componentWillUpdate: ");
   }
   componentDidUpdate(prevProps, prevState) {
-    console.log("App componentDidUpdate: ");
+    //console.log("App componentDidUpdate: ");
   }
   componentWillUnmount() {
-    //console.log("componentWillUnmount");
+    ////console.log("componentWillUnmount");
   }
 
   setTitle(paths) {
@@ -38,7 +40,7 @@ class App extends Component {
   }
 
   render() {
-    let { opacity, zoom, loadingBar } = this.props;
+    let { opacity, zoom, loadingBar, fileList } = this.props;
     return (
       <div>
         <header>
@@ -65,9 +67,9 @@ class App extends Component {
                       <li className="active">
                           <Link to="/edit/"><i className="fa fa-th-large"></i> <span className="nav-label">List</span> <span className="fa arrow"></span></Link>
                           <ul className="nav nav-second-level">
-                            {OCRLIST.map((ocr, index) =>
+                            {fileList.list.map((ocr, index) =>
                               <li key={`ocr-${index}`} className="active">
-                                <Link to={{pathname: '/edit', search: `?e=${index}`}}>
+                                <Link to={{pathname: '/edit/'+ocr.name+'/'+ocr.imageType/*, search: `?e=${ocr.imageType}`*/}}>
                                   {ocr.name}
                                 </Link>
                               </li>
@@ -114,12 +116,13 @@ class App extends Component {
 }
 
 function mapStateToProps(state) {
-  const { jsonData, opacity, zoom, loadingBar } = state;
+  const { jsonData, opacity, zoom, loadingBar, fileList } = state;
   return {
     jsonData,
     opacity,
     zoom,
-    loadingBar
+    loadingBar,
+    fileList
   };
 }
 
